@@ -11,7 +11,7 @@ This documentation is intended to provide information on how to use the provided
 
 The parser testing process and possible limitations are discussed in Testing and Verification and Evaluation respectively.
 
-Release (stable) versions of the file can be found in [release/](/C-CSVParser/release/). 
+Release (stable) versions of the file can be found in [release/](/c-csv-parser/release/). 
 
 # Basic Tutorial
 Once the header file and the implementation file are included in your project, CSV files and strings can be parsed using the following functions:
@@ -37,7 +37,7 @@ The return value is a pointer to the structure used to store the parsed CSV valu
 
 `struct csv_table` is the highest level of the parsed CSV structure. It is made up of a doubly linked list of `struct csv_row`, which are in turn made up of a doubly linked list of `struct csv_cell`. The `struct csv_cell` contains the appropriate parsed string value in its `str` field.
 
-![Structure of CSV Diagram](/C-CSVParser/doc/csv_structure_diagram.png?raw=true "CSV Structure Diagram")
+![Structure of CSV Diagram](/c-csv-parser/doc/csv_structure_diagram.png?raw=true "CSV Structure Diagram")
 
 The structure is designed to mirror the table layout in the unparsed CSV. The length field is the number of CSV rows or CSV Cells in the list of a CSV table or CSV row respectively.
 
@@ -46,7 +46,7 @@ Functions are provided to get a row/cell at a specific row and column index (see
 The parsed CSV structure is allocated on the heap and therefore must be freed manually. The header files include free functions for each of the CSV structures to make sure all allocated memory is freed (see Free CSV Structures).
 
 # Examples
-- [Parsing and Searching A CSV File](/C-CSVParser/examples/parsing_customer_info.c)
+- [Parsing and Searching A CSV File](/c-csv-parser/examples/parsing_customer_info.c)
 
 # In-depth Tutorial
 ## Create CSV Structures
@@ -635,7 +635,7 @@ C++ would be an excellent language to extend the core of this CSV parser. It pro
 
 # Testing and Verification
 ## Testing Process and How to Run.
-The parser was tested using the various input files in [testing/inputs](/C-CSVParser/testing/inputs).
+The parser was tested using the various input files in [testing/inputs](/c-csv-parser/testing/inputs).
 
 The input files were sourced from the GitHub repository: https://github.com/maxogden/csv-spectrum but also includes other added files.
 
@@ -643,8 +643,8 @@ The parser output was compared to the output of the parser included in the pytho
 
 To run the test on your local system, follow the below steps.
 
-1. Compile [testing/testparser.c](/C-CSVParser/testing/testparser.c) to testing/testparser.out.
-2. Run the python script [testing/testingparser.py](/C-CSVParser/testing/testingparser.py) in the directory [testing/](/C-CSVParser/testing/).
+1. Compile [testing/testparser.c](/c-csv-parser/testing/testparser.c) to testing/testparser.out.
+2. Run the python script [testing/testingparser.py](/c-csv-parser/testing/testingparser.py) in the directory [testing/](/c-csv-parser/testing/).
 
 *Note: The python script only prints the results failed test cases, to print all test cases. Use the flag `--all-tests` to print the results of all test cases. The flag `--print-files` can be used to print the contents of the input CSV files and the result.*
 
@@ -652,7 +652,7 @@ To run the test on your local system, follow the below steps.
 
 ## Test Results
 
-The only differing case from the python parser is for the file [inputs/my_escaped_quotes.csv](/C-CSVParser/testing/inputs/my_escaped_quotes.csv):
+The only differing case from the python parser is for the file [inputs/my_escaped_quotes.csv](/c-csv-parser/testing/inputs/my_escaped_quotes.csv):
 ```
 "ha """ha""" ha"
 ```
@@ -676,4 +676,4 @@ This is because the parser removes quotation marks that are not escaped. To esca
 ```
 
 In this case, the parser counted the first two quotations as an escaped quotation and therefore added it to the final string. The third quotation was not escaped since the previous quotation is already part of an escaped pair and was therefore stripped from the final string.
-To see the raw code on how quotations are stripped, see `malloc_strip_quotes_and_spaces` in [csvparser.c](/C-CSVParser/csvparser.c) 
+To see the raw code on how quotations are stripped, see `malloc_strip_quotes_and_spaces` in [csvparser.c](/c-csv-parser/csvparser.c) 
